@@ -1,5 +1,5 @@
 package com.user.registration.customvalidation;
 
-public interface LoginThroughEmail {
+public interface PhoneUsed {
 
 }

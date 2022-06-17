@@ -1,5 +1,6 @@
 package com.user.registration.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
 import com.user.registration.dto.CredentialType;
@@ -11,6 +12,6 @@ public interface UserVerificationService {
 public Map<CredentialType,Boolean> getVerificationStatus(LoginDTO loginDTO) throws UserPhoneEmailVerificationException;
 public void verifyPhoneNumberRequest(Long phoneNumber)  throws UserPhoneEmailVerificationException;
 public Boolean verifyPhoneNumberProcess(Long phoneNumber ,int otp) throws UserPhoneEmailVerificationException;
-public void verifyEmailIdRequest(String emailId) throws UserPhoneEmailVerificationException;
-public Boolean verifyEmailIdProcess(String emailId) throws UserPhoneEmailVerificationException;
+public void verifyEmailIdRequest(String emailId) throws UserPhoneEmailVerificationException, NoSuchAlgorithmException ;
+public Boolean verifyEmailIdProcess(String emailId,String hashCode) throws UserPhoneEmailVerificationException, NoSuchAlgorithmException ;
 }

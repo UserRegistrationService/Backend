@@ -1,4 +1,4 @@
-package com.user.registration.utility;
+package com.user.registration.exceptionhandling;
 
 public class ErrorInfo {
 	private String errorMessage;

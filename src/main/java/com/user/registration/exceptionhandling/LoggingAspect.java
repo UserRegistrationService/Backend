@@ -1,4 +1,4 @@
-package com.user.registration.utility;
+package com.user.registration.exceptionhandling;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

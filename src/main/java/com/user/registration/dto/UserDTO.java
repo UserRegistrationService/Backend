@@ -19,7 +19,7 @@ private String name;
 @Pattern(regexp = ".{10,60}"  ,message="{address.invalid_pattern}")
 private String address;
 @NotNull(message = "{emailId.not_present}")
-@Pattern(regexp = "[a-z0-9.-_]{1,10}@gmail.com"  ,message="{emailId.invalid_pattern}")
+@Pattern(regexp = "[a-z0-9.-_]{1,20}@gmail.com"  ,message="{emailId.invalid_pattern}")
 private String emailId;
 @NotNull(message = "{mobileNumber.not_present}")
 @Min(value = 5000000000L,message="{mobileNumber.invalid_pattern}")
