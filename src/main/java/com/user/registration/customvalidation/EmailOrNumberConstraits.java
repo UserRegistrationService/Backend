@@ -19,7 +19,7 @@ import javax.validation.Payload;
 
 
 @Documented
-@Constraint(validatedBy = LoginThroughValidator.class)
+@Constraint(validatedBy = CredentialTypeValidator.class)
 @Target( { ElementType.FIELD,ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Repeatable(value=com.user.registration.customvalidation.EmailOrNumberConstraits.List.class)

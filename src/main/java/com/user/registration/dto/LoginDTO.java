@@ -26,12 +26,12 @@ public class LoginDTO {
 	@NotNull(groups = {LoginThroughPhone.class,LoginThroughEmail.class},message = "{emailOrNumber.not_present}")
 	@EmailOrNumberConstraits(groups = {LoginThroughEmail.class},message = "{emailOrNumber.invalid_for_email_login}")
 	@EmailOrNumberConstraits(groups = {LoginThroughPhone.class},message = "{emailOrNumber.invalid_for_phone_login}")
-	private LoginThrough emailOrNumber;
+	private CredentialType emailOrNumber;
 	
-	public LoginThrough getEmailOrNumber() {
+	public CredentialType getEmailOrNumber() {
 		return emailOrNumber;
 	}
-	public void setEmailOrNumber(LoginThrough emailOrNumber) {
+	public void setEmailOrNumber(CredentialType emailOrNumber) {
 		this.emailOrNumber = emailOrNumber;
 	}
 	public String getEmailId() {

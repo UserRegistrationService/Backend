@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.user.registration.exception.UserLoginResgistrationException;
+import com.user.registration.exception.UserPhoneEmailVerificationException;
 
 
 @RestControllerAdvice
@@ -37,7 +38,17 @@ public class ExceptionControllerAdvice
 	LOGGER.error(exception.getMessage(), exception);
 	ErrorInfo errorInfo = new ErrorInfo();
 	errorInfo.setErrorCode(HttpStatus.BAD_REQUEST.value());
-	errorInfo.setErrorMessage(environment.getProperty(exception.getMessage()));
+	errorInfo.setErrorMessage("LOGIN/REGISTRATION FAILED- "+environment.getProperty(exception.getMessage()));
+	return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);
+    }
+    
+    @ExceptionHandler(UserPhoneEmailVerificationException.class)
+    public ResponseEntity<ErrorInfo> userPhoneEmailVerificationException(UserPhoneEmailVerificationException exception)
+    {
+	LOGGER.error(exception.getMessage(), exception);
+	ErrorInfo errorInfo = new ErrorInfo();
+	errorInfo.setErrorCode(HttpStatus.BAD_REQUEST.value());
+	errorInfo.setErrorMessage("PHONE/EMAIL VERIFICATION FAILED- "+environment.getProperty(exception.getMessage()));
 	return new ResponseEntity<>(errorInfo, HttpStatus.BAD_REQUEST);
     }
 
