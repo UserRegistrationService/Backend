@@ -1,7 +1,6 @@
 package com.user.registration.entity;
 
-import java.time.LocalDateTime;
-
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -11,7 +10,7 @@ public class SuspendedUser {
 	@Id
 	private Long mobileNumber;
 	private String emailId;
-	private LocalDateTime suspendedAt;
+	private LocalDate suspendedOn;
 	public Long getMobileNumber() {
 		return mobileNumber;
 	}
@@ -24,11 +23,12 @@ public class SuspendedUser {
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-	public LocalDateTime getSuspendedAt() {
-		return suspendedAt;
+	public LocalDate getSuspendedOn() {
+		return suspendedOn;
 	}
-	public void setSuspendedAt(LocalDateTime suspendedAt) {
-		this.suspendedAt = suspendedAt;
+	public void setSuspendedOn(LocalDate suspendedOn) {
+		this.suspendedOn = suspendedOn;
 	}
+	
 	
 }

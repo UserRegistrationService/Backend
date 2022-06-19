@@ -74,7 +74,6 @@ public String getName() {
 	  user.setLocked(false);
 	  user.setConsecutiveLoginFailure(0);
 	  user.setRegisteredAt(LocalDateTime.now());
-	  
 	  return user;
 		
 	}
