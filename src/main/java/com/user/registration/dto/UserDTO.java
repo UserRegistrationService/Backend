@@ -19,7 +19,7 @@ private String name;
 @Pattern(regexp = ".{10,60}"  ,message="{address.invalid_pattern}")
 private String address;
 @NotNull(message = "{emailId.not_present}")
-@Pattern(regexp = "[a-z0-9.-_]{1,20}@gmail.com"  ,message="{emailId.invalid_pattern}")
+@Pattern(regexp = "[a-z0-9.-_]{1,20}@gmail[.]com"  ,message="{emailId.invalid_pattern}")
 private String emailId;
 @NotNull(message = "{mobileNumber.not_present}")
 @Min(value = 5000000000L,message="{mobileNumber.invalid_pattern}")
@@ -29,6 +29,7 @@ private Long mobileNumber;
 @Pattern(regexp = "\\S{8,15}"  ,message="{password.invalid_pattern}")
 private String password;
 
+private String role;
 	
 public String getName() {
 		return name;
@@ -76,6 +77,24 @@ public String getName() {
 	  user.setRegisteredAt(LocalDateTime.now());
 	  return user;
 		
+	}
+	public static UserDTO prepareDTO(User user)
+	{
+	  UserDTO userDTO = new UserDTO();
+	  userDTO.setName(user.getName());
+	  userDTO.setAddress(user.getAddress());
+	  userDTO.setEmailId(user.getEmailId());
+	  userDTO.setMobileNumber(user.getMobileNumber());
+	  userDTO.setPassword("masked");
+	  
+	  return userDTO;
+		
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 

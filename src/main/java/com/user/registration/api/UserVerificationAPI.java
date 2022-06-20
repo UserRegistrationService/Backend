@@ -44,14 +44,14 @@ UserVerificationService  userVerificationService;
 Environment environment;
 
 @PostMapping("/status/phone")
-public ResponseEntity<Map<CredentialType,Boolean>> getVerifyStatusUsingPhone(@Validated({PhoneUsed.class,PasswordNotRequired.class}) @RequestBody LoginDTO loginDTO) throws UserPhoneEmailVerificationException
+public ResponseEntity<Map<CredentialType,String>> getVerifyStatusUsingPhone(@Validated({PhoneUsed.class,PasswordNotRequired.class}) @RequestBody LoginDTO loginDTO) throws UserPhoneEmailVerificationException
 {  
 	
 	return new ResponseEntity<>(userVerificationService.getVerificationStatus(loginDTO),HttpStatus.OK);
 	
 }
 @PostMapping("/status/email")
-public ResponseEntity<Map<CredentialType,Boolean>> getVerifyStatusUsingEmail(@Validated({EmailUsed.class,PasswordNotRequired.class}) @RequestBody LoginDTO loginDTO) throws UserPhoneEmailVerificationException
+public ResponseEntity<Map<CredentialType,String>> getVerifyStatusUsingEmail(@Validated({EmailUsed.class,PasswordNotRequired.class}) @RequestBody LoginDTO loginDTO) throws UserPhoneEmailVerificationException
 {  
 	
 	return new ResponseEntity<>(userVerificationService.getVerificationStatus(loginDTO),HttpStatus.OK);

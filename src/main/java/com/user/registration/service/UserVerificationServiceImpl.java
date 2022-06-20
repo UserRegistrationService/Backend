@@ -40,13 +40,13 @@ public class UserVerificationServiceImpl implements UserVerificationService{
 	HashingUtil hashUtil;
 	
 	@Override
-	public Map<CredentialType, Boolean> getVerificationStatus(LoginDTO loginDTO) throws UserPhoneEmailVerificationException {
+	public Map<CredentialType, String> getVerificationStatus(LoginDTO loginDTO) throws UserPhoneEmailVerificationException {
 		// TODO Auto-generated method stub
-		Map<CredentialType,Boolean> credentialVerificationMap=new HashMap<>();
+		Map<CredentialType,String> credentialVerificationMap=new HashMap<>();
 		Optional<User> userOptional=loginDTO.getEmailOrNumber().equals(CredentialType.PHONE)? userRepo.findById(loginDTO.getMobileNumber()):userRepo.findByEmailId(loginDTO.getEmailId());
 	    User user= userOptional.orElseThrow(() ->  new UserPhoneEmailVerificationException("Service.NO_USER_FOUND") );
-	    credentialVerificationMap.put(CredentialType.EMAIL, user.getEmailVerified());
-	    credentialVerificationMap.put(CredentialType.PHONE, user.getNumberVerified());
+	    credentialVerificationMap.put(CredentialType.EMAIL, user.getEmailId()+"$$"+user.getEmailVerified());
+	    credentialVerificationMap.put(CredentialType.PHONE, user.getMobileNumber()+"$$"+user.getNumberVerified());
 	    return credentialVerificationMap;
 	}
 

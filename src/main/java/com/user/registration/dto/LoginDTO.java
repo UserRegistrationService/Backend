@@ -14,7 +14,7 @@ import com.user.registration.customvalidation.PhoneUsed;
 
 public class LoginDTO {
 	@NotNull(groups = {EmailUsed.class},message="{emailId.not_present}")
-	@Pattern(groups = {EmailUsed.class},regexp = "[a-z0-9.-_]{1,20}@gmail.com"  ,message="{emailId.invalid_pattern}")
+	@Pattern(groups = {EmailUsed.class},regexp = "[a-z0-9.-_]{1,20}@gmail[.]com"  ,message="{emailId.invalid_pattern}")
 	@Null(groups = {PhoneUsed.class},message="{emailId.present}")
 	private String emailId;
 	@NotNull(groups = {PhoneUsed.class},message="{mobileNumber.not_present}")

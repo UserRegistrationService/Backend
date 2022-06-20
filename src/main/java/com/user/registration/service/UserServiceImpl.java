@@ -26,6 +26,8 @@ public class UserServiceImpl implements UserService{
 	UserRepository userRepo;
 	
 	@Autowired
+	AdministratorService  adminService;
+	@Autowired
 	SuspendedUserRepository suspendedUserRepo;
 	
 	@Override
@@ -56,7 +58,7 @@ public class UserServiceImpl implements UserService{
     }
     
     @Override
-    public Boolean login(LoginDTO loginDTO) throws  UserLoginResgistrationException
+    public UserDTO login(LoginDTO loginDTO) throws  UserLoginResgistrationException
     {
     Optional<User> userOptional=loginDTO.getEmailOrNumber().equals(CredentialType.PHONE)? userRepo.findById(loginDTO.getMobileNumber()):userRepo.findByEmailId(loginDTO.getEmailId());
     	 
@@ -75,10 +77,24 @@ public class UserServiceImpl implements UserService{
      if(user.getPassword().equals(loginDTO.getPassword()))
      {
     	user.setConsecutiveLoginFailure(0);
-    	return true;
+    	UserDTO userDTO = UserDTO.prepareDTO(user);
+    	//Here its assumed that ADMINISTRATOR phone number is very first valid number.
+        //There is only one ADMINISTRATOR
+    	if( user.getMobileNumber().equals(5000000000L) && adminService.isAdministrator(user.getMobileNumber()) )
+         {
+    	userDTO.setRole("ADMIN");		 
+         }
+    	
+    	return userDTO;
      }
      else
-     {
+    	 
+     {  //Here its assumed that ADMINISTRATOR phone number is very first valid number.
+         //There is only one ADMINISTRATOR
+    	 //If ADMINISTRATOR ACCOUNT IS LOCKED THEN WE CAN'T DO ANYTHING
+    	 //IT IS AVOIDED ADMINISTRATOR CAN ENTER ANY NUMBER OF WRONG PASSWORD
+    	 if(! user.getMobileNumber().equals(5000000000L) || !adminService.isAdministrator(user.getMobileNumber()))
+       {
     	if(user.getConsecutiveLoginFailure().equals(2)) 
     	{
     		user.setLocked(true);
@@ -88,7 +104,8 @@ public class UserServiceImpl implements UserService{
     	{
     		user.setConsecutiveLoginFailure(user.getConsecutiveLoginFailure()+1);
     	}
-    	return false;
+       }
+    	throw new UserLoginResgistrationException("Service.INVALID_CREDENTIAL");
      }
     }
   

@@ -26,6 +26,15 @@ create table suspended_user (
    
    CONSTRAINT ps_user_pk PRIMARY KEY ( mobile_number)
 );
+
+create table administrator (
+   mobile_number BIGINT,
+   CONSTRAINT ps_user_pk PRIMARY KEY ( mobile_number)
+
+);
+
+INSERT INTO user VALUES(5000000000,'ADMINISTRATOR','UserRegistrationService Office','admin789@gmail.com','PASSWORD',1,1,0,0,NOW());
+INSERT INTO administrator VALUES(5000000000);
 SET GLOBAL event_scheduler = ON;
 
 
@@ -86,6 +95,7 @@ DELIMITER ;
 SELECT * FROM USER;
 
 SELECT * FROM SUSPENDED_USER;
+SELECT * FROM ADMINISTRATOR;
 
 SELECT NOW();
 
